@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// IoT Theme Colors
+				success: 'hsl(var(--success))',
+				warning: 'hsl(var(--warning))',
+				info: 'hsl(var(--info))',
+				'iot-accent': 'hsl(var(--iot-accent))',
+				'iot-neon': 'hsl(var(--iot-neon))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +91,70 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(30px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'glow': {
+					'0%, 100%': {
+						boxShadow: '0 0 5px rgba(0, 191, 255, 0.5)'
+					},
+					'50%': {
+						boxShadow: '0 0 20px rgba(0, 191, 255, 0.8)'
+					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0px)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
+				},
+				'slide-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(50px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'pulse-glow': {
+					'0%, 100%': {
+						opacity: '1',
+						boxShadow: '0 0 5px rgba(0, 191, 255, 0.5)'
+					},
+					'50%': {
+						opacity: '0.7',
+						boxShadow: '0 0 25px rgba(0, 191, 255, 0.8)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 1s ease-out',
+				'glow': 'glow 2s ease-in-out infinite alternate',
+				'float': 'float 6s ease-in-out infinite',
+				'slide-up': 'slide-up 0.8s ease-out',
+				'pulse-glow': 'pulse-glow 2s ease-in-out infinite'
+			},
+			backgroundImage: {
+				'iot-gradient': 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--iot-accent)) 100%)',
+				'iot-radial': 'radial-gradient(circle at 50% 50%, hsl(var(--primary)) 0%, hsl(var(--background)) 70%)'
+			},
+			fontFamily: {
+				'mono': ['JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', 'monospace'],
+				'tech': ['Orbitron', 'Exo 2', 'Rajdhani', 'sans-serif']
 			}
 		}
 	},
