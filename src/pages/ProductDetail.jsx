@@ -15,7 +15,7 @@ const ProductDetail = () => {
 
   // Mock product data - in a real app, this would come from an API
   const products = {
-    1: {
+    "1": {
       title: "AccuFlow Pro",
       description: "Advanced flow control system with real-time monitoring and precision adjustment capabilities for industrial applications.",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop",
@@ -47,7 +47,7 @@ const ProductDetail = () => {
         "Pharmaceutical"
       ]
     },
-    2: {
+    "2": {
       title: "DataSync Enterprise",
       description: "Comprehensive data synchronization platform for large-scale enterprise operations with advanced analytics.",
       image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
@@ -79,7 +79,7 @@ const ProductDetail = () => {
         "Analytics Platforms"
       ]
     },
-    3: {
+    "3": {
       title: "SafeGuard Monitor",
       description: "24/7 security monitoring system with AI-powered threat detection and automated response capabilities.",
       image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop",
@@ -113,7 +113,7 @@ const ProductDetail = () => {
     }
   };
 
-  const product = products[id as keyof typeof products];
+  const product = products[id];
 
   if (!product) {
     return (
