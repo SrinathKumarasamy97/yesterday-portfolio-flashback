@@ -1,21 +1,21 @@
 
 import React from 'react';
-import Hero from '../components/Hero';
-import About from '../components/About';
-import Skills from '../components/Skills';
-import Projects from '../components/Projects';
-import Contact from '../components/Contact';
 import Navigation from '../components/Navigation';
+import Hero from '../components/Hero';
+import FeaturedProducts from '../components/FeaturedProducts';
+import Stats from '../components/Stats';
+import Testimonials from '../components/Testimonials';
+import Footer from '../components/Footer';
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
       <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
+      <Stats />
+      <FeaturedProducts />
+      <Testimonials />
+      <Footer />
     </div>
   );
 };

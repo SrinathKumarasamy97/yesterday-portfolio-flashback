@@ -1,75 +1,83 @@
 
-import React, { useEffect, useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { ArrowRight, Shield, Zap, Target } from 'lucide-react';
 
 const Hero = () => {
-  const [currentText, setCurrentText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  
-  const texts = ['Frontend Developer', 'UI/UX Designer', 'Creative Thinker'];
-  
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      const current = texts[currentIndex];
-      
-      if (isDeleting) {
-        setCurrentText(current.substring(0, currentText.length - 1));
-        
-        if (currentText === '') {
-          setIsDeleting(false);
-          setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
-        }
-      } else {
-        setCurrentText(current.substring(0, currentText.length + 1));
-        
-        if (currentText === current) {
-          setTimeout(() => setIsDeleting(true), 2000);
-        }
-      }
-    }, isDeleting ? 50 : 100);
-
-    return () => clearTimeout(timeout);
-  }, [currentText, currentIndex, isDeleting, texts]);
-
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-background to-muted">
-      <div className="container mx-auto px-6 text-center">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 animate-fade-in">
-            Hi, I'm <span className="text-primary">Alex</span>
-          </h1>
-          <h2 className="text-2xl md:text-4xl text-muted-foreground mb-8 h-12">
-            I'm a <span className="text-primary font-semibold">{currentText}</span>
-            <span className="animate-pulse">|</span>
-          </h2>
-          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-            Creating beautiful, functional, and user-centered digital experiences
-            that make a difference. Let's build something amazing together.
-          </p>
-          <div className="space-x-4">
-            <button 
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-all duration-300 transform hover:scale-105"
-            >
-              View My Work
-            </button>
-            <button 
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="border border-primary text-primary px-8 py-3 rounded-lg font-semibold hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-            >
-              Get In Touch
-            </button>
-          </div>
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-to-tr from-secondary/10 to-transparent rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="container mx-auto px-6 py-32 relative z-10">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
+              Precision Solutions for
+              <span className="text-primary block">Modern Industry</span>
+            </h1>
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed"
+          >
+            Accurite Systems delivers cutting-edge technology solutions that drive efficiency, 
+            accuracy, and innovation across industries worldwide.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+          >
+            <Button asChild size="lg" className="text-lg px-8 py-6">
+              <Link to="/products">
+                Explore Products <ArrowRight className="ml-2" size={20} />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6">
+              <Link to="/about">Learn More</Link>
+            </Button>
+          </motion.div>
+
+          {/* Feature highlights */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16"
+          >
+            <div className="flex flex-col items-center text-center">
+              <Shield className="w-12 h-12 text-primary mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Reliable & Secure</h3>
+              <p className="text-muted-foreground">Industry-leading security and reliability standards</p>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <Zap className="w-12 h-12 text-primary mb-4" />
+              <h3 className="text-lg font-semibold mb-2">High Performance</h3>
+              <p className="text-muted-foreground">Optimized for maximum efficiency and speed</p>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <Target className="w-12 h-12 text-primary mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Precision Focused</h3>
+              <p className="text-muted-foreground">Accurate solutions tailored to your needs</p>
+            </div>
+          </motion.div>
         </div>
       </div>
-      
-      <button 
-        onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-muted-foreground hover:text-primary transition-colors duration-300 animate-bounce"
-      >
-        <ChevronDown size={32} />
-      </button>
     </section>
   );
 };

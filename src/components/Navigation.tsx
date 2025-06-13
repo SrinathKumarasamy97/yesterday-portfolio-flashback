@@ -1,10 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,33 +17,46 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({
-      behavior: 'smooth'
-    });
-    setIsMobileMenuOpen(false);
-  };
+  const navItems = [
+    { title: "Home", path: "/" },
+    { title: "Products", path: "/products" },
+    { title: "Customers", path: "/customers" },
+    { title: "About", path: "/about" },
+    { title: "Contact", path: "/contact" },
+  ];
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-background/95 backdrop-blur-sm border-b border-border' : 'bg-transparent'
-    }`}>
+    <motion.nav 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-background/95 backdrop-blur-sm border-b border-border shadow-lg' : 'bg-transparent'
+      }`}
+    >
       <div className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          <div className="text-2xl font-bold text-foreground">
-            Portfolio
-          </div>
+          <Link to="/" className="text-2xl font-bold text-primary">
+            Accurite Systems
+          </Link>
           
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">
-            {['home', 'about', 'skills', 'projects', 'contact'].map((item) => (
-              <button
-                key={item}
-                onClick={() => scrollToSection(item)}
-                className="text-foreground hover:text-primary transition-colors duration-200 capitalize"
+            {navItems.map((item) => (
+              <Link
+                key={item.title}
+                to={item.path}
+                className={`text-foreground hover:text-primary transition-colors duration-200 relative ${
+                  location.pathname === item.path ? 'text-primary' : ''
+                }`}
               >
-                {item}
-              </button>
+                {item.title}
+                {location.pathname === item.path && (
+                  <motion.div
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
+                    layoutId="activeTab"
+                  />
+                )}
+              </Link>
             ))}
           </div>
 
@@ -54,21 +70,28 @@ const Navigation = () => {
         </div>
 
         {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4">
-            {['home', 'about', 'skills', 'projects', 'contact'].map((item) => (
-              <button
-                key={item}
-                onClick={() => scrollToSection(item)}
-                className="block w-full text-left py-2 text-foreground hover:text-primary transition-colors duration-200 capitalize"
+        <motion.div
+          initial={false}
+          animate={{ height: isMobileMenuOpen ? 'auto' : 0 }}
+          className="md:hidden overflow-hidden"
+        >
+          <div className="pt-4 pb-4 space-y-2">
+            {navItems.map((item) => (
+              <Link
+                key={item.title}
+                to={item.path}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`block py-2 text-foreground hover:text-primary transition-colors duration-200 ${
+                  location.pathname === item.path ? 'text-primary font-semibold' : ''
+                }`}
               >
-                {item}
-              </button>
+                {item.title}
+              </Link>
             ))}
           </div>
-        )}
+        </motion.div>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 
