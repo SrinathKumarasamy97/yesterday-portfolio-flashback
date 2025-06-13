@@ -1,119 +1,132 @@
 
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import { ArrowLeft, CheckCircle, Star } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { motion } from 'framer-motion';
+import { ArrowLeft, Check, Star, Download, Phone } from 'lucide-react';
 
 const ProductDetail = () => {
-  const { id } = useParams<{ id: string }>();
-  
+  const { id } = useParams();
+
+  // Mock product data - in a real app, this would come from an API
   const products = {
-    '1': {
-      id: 1,
-      title: "IoT Flow Sensors",
-      price: "$2,499",
-      image: "/placeholder.svg",
+    1: {
+      title: "AccuFlow Pro",
+      description: "Advanced flow control system with real-time monitoring and precision adjustment capabilities for industrial applications.",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop",
       category: "Flow Control",
-      description: "Advanced IoT-enabled flow sensors with real-time monitoring capabilities, wireless connectivity, and precision measurement for industrial applications.",
+      price: "Starting at $15,000",
+      rating: 4.8,
+      reviews: 127,
       features: [
-        "Real-time wireless data transmission",
-        "±0.5% accuracy measurement",
-        "Battery life up to 5 years",
-        "IP67 waterproof rating",
-        "Cloud-based analytics dashboard",
-        "Predictive maintenance alerts"
+        "Real-time flow monitoring with precision sensors",
+        "Advanced control algorithms for optimal performance",
+        "IoT connectivity for remote monitoring",
+        "Predictive maintenance capabilities",
+        "Energy efficiency optimization",
+        "24/7 technical support included"
       ],
       specifications: {
-        "Flow Range": "0.1 - 1000 L/min",
-        "Pressure Rating": "Up to 16 bar",
-        "Temperature Range": "-40°C to +85°C",
-        "Communication": "LoRaWAN, NB-IoT, WiFi",
-        "Power Supply": "3.6V Lithium battery",
-        "Material": "Stainless steel 316L"
+        "Flow Range": "0.1 - 1000 GPM",
+        "Accuracy": "±0.1%",
+        "Pressure Rating": "Up to 1500 PSI",
+        "Temperature Range": "-40°C to +120°C",
+        "Communication": "Modbus, Ethernet/IP, HART",
+        "Power Supply": "24V DC, 85-264V AC"
       },
       applications: [
-        "Water distribution networks",
-        "Chemical processing",
-        "HVAC systems",
-        "Industrial automation"
+        "Chemical Processing",
+        "Oil & Gas",
+        "Water Treatment",
+        "Food & Beverage",
+        "Pharmaceutical"
       ]
     },
-    '2': {
-      id: 2,
-      title: "Smart Pressure Monitors",
-      price: "$1,899",
-      image: "/placeholder.svg",
-      category: "Pressure Control",
-      description: "Intelligent pressure monitoring systems with IoT connectivity for continuous monitoring and automated control in critical industrial processes.",
+    2: {
+      title: "DataSync Enterprise",
+      description: "Comprehensive data synchronization platform for large-scale enterprise operations with advanced analytics.",
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
+      category: "Data Management",
+      price: "Starting at $25,000",
+      rating: 4.9,
+      reviews: 89,
       features: [
-        "24/7 continuous monitoring",
-        "Automatic pressure regulation",
-        "Mobile app integration",
-        "Multi-point calibration",
-        "Emergency shutdown capability",
-        "Historical data logging"
+        "Real-time data synchronization across systems",
+        "Advanced analytics and reporting",
+        "Cloud and on-premise deployment options",
+        "API integration capabilities",
+        "Data transformation and cleansing",
+        "Enterprise-grade security"
       ],
       specifications: {
-        "Pressure Range": "0 - 1000 bar",
-        "Accuracy": "±0.25% of full scale",
-        "Response Time": "< 1ms",
-        "Communication": "Ethernet, Modbus, HART",
-        "Display": "4.3'' color touchscreen",
-        "Certification": "ATEX, SIL2"
+        "Data Throughput": "Up to 1TB/hour",
+        "Supported Formats": "JSON, XML, CSV, Parquet",
+        "Databases": "SQL Server, Oracle, MySQL, PostgreSQL",
+        "Cloud Platforms": "AWS, Azure, Google Cloud",
+        "Security": "AES-256 encryption, OAuth 2.0",
+        "SLA": "99.9% uptime guarantee"
       },
       applications: [
-        "Oil & gas pipelines",
-        "Power generation",
-        "Pharmaceutical manufacturing",
-        "Food & beverage processing"
+        "Enterprise Resource Planning",
+        "Customer Relationship Management",
+        "Business Intelligence",
+        "Data Warehousing",
+        "Analytics Platforms"
       ]
     },
-    '3': {
-      id: 3,
-      title: "Data Analytics Platform",
-      price: "$4,999",
-      image: "/placeholder.svg",
-      category: "Software",
-      description: "Comprehensive data analytics platform that aggregates sensor data, provides real-time insights, and enables predictive maintenance for industrial IoT systems.",
+    3: {
+      title: "SafeGuard Monitor",
+      description: "24/7 security monitoring system with AI-powered threat detection and automated response capabilities.",
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop",
+      category: "Security",
+      price: "Starting at $12,000",
+      rating: 4.7,
+      reviews: 203,
       features: [
-        "Real-time data visualization",
-        "Predictive analytics engine",
-        "Custom dashboard creation",
-        "API integration support",
-        "Machine learning algorithms",
-        "Multi-tenant architecture"
+        "AI-powered threat detection and analysis",
+        "24/7 automated monitoring",
+        "Instant alert notifications",
+        "Automated response protocols",
+        "Comprehensive audit logging",
+        "Integration with existing security systems"
       ],
       specifications: {
-        "Data Sources": "Unlimited sensor connections",
-        "Update Frequency": "Real-time (< 100ms)",
-        "Storage": "Cloud-based, scalable",
-        "APIs": "RESTful, GraphQL",
-        "Security": "AES-256 encryption",
-        "Deployment": "Cloud, On-premise, Hybrid"
+        "Detection Rate": "99.7% accuracy",
+        "Response Time": "< 30 seconds",
+        "Supported Protocols": "SNMP, Syslog, REST API",
+        "Storage": "Up to 10TB log retention",
+        "Alerts": "Email, SMS, Webhook",
+        "Compliance": "SOC 2, ISO 27001"
       },
       applications: [
-        "Smart manufacturing",
-        "Environmental monitoring",
-        "Energy management",
-        "Supply chain optimization"
+        "Network Security",
+        "Perimeter Protection",
+        "Incident Response",
+        "Compliance Monitoring",
+        "Threat Intelligence"
       ]
     }
   };
 
-  const productId = id as keyof typeof products;
-  const product = products[productId];
+  const product = products[id as keyof typeof products];
 
   if (!product) {
     return (
       <div className="min-h-screen bg-background">
         <Navigation />
-        <div className="container mx-auto px-6 py-20 text-center">
-          <h1 className="text-2xl font-bold mb-4">Product Not Found</h1>
-          <Link to="/products" className="text-primary hover:underline">
-            Return to Products
-          </Link>
+        <div className="pt-32 pb-16 text-center">
+          <h1 className="text-4xl font-bold text-foreground mb-4">Product Not Found</h1>
+          <Button asChild>
+            <Link to="/products">
+              <ArrowLeft className="mr-2" size={16} />
+              Back to Products
+            </Link>
+          </Button>
         </div>
         <Footer />
       </div>
@@ -124,121 +137,157 @@ const ProductDetail = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
       
-      <div className="pt-20">
-        <div className="container mx-auto px-6 py-12">
-          <Link 
-            to="/products" 
-            className="inline-flex items-center text-primary hover:text-primary/80 mb-8 transition-colors"
+      <div className="pt-32 pb-16">
+        <div className="container mx-auto px-6">
+          {/* Breadcrumb */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8"
           >
-            <ArrowLeft className="mr-2" size={20} />
-            Back to Products
-          </Link>
+            <Button asChild variant="ghost" size="sm">
+              <Link to="/products">
+                <ArrowLeft className="mr-2" size={16} />
+                Back to Products
+              </Link>
+            </Button>
+          </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Product Image */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+          {/* Product Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16"
+          >
+            <div>
               <img 
                 src={product.image} 
                 alt={product.title}
                 className="w-full h-96 object-cover rounded-lg shadow-lg"
               />
-            </motion.div>
-
-            {/* Product Info */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="mb-4">
-                <span className="text-sm text-primary font-semibold">{product.category}</span>
-              </div>
-              <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
-              <p className="text-xl text-primary font-bold mb-6">{product.price}</p>
-              <p className="text-muted-foreground mb-8">{product.description}</p>
-              
-              <div className="flex items-center mb-8">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                ))}
-                <span className="ml-2 text-sm text-muted-foreground">(4.8/5 - 127 reviews)</span>
+            </div>
+            <div className="space-y-6">
+              <div>
+                <Badge className="mb-4">{product.category}</Badge>
+                <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                  {product.title}
+                </h1>
+                <p className="text-xl text-muted-foreground">
+                  {product.description}
+                </p>
               </div>
 
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
-              >
-                Request Quote
-              </motion.button>
-            </motion.div>
-          </div>
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center">
+                  {[...Array(5)].map((_, i) => (
+                    <Star 
+                      key={i} 
+                      className={`w-5 h-5 ${i < Math.floor(product.rating) ? 'fill-primary text-primary' : 'text-muted-foreground'}`} 
+                    />
+                  ))}
+                  <span className="ml-2 text-sm text-muted-foreground">
+                    {product.rating} ({product.reviews} reviews)
+                  </span>
+                </div>
+              </div>
+
+              <div className="text-3xl font-bold text-primary">
+                {product.price}
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button size="lg" className="flex-1">
+                  <Phone className="mr-2" size={20} />
+                  Request Quote
+                </Button>
+                <Button variant="outline" size="lg" className="flex-1">
+                  <Download className="mr-2" size={20} />
+                  Download Brochure
+                </Button>
+              </div>
+            </div>
+          </motion.div>
 
           {/* Product Details Tabs */}
-          <div className="mt-16">
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Features */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="bg-card p-6 rounded-lg border"
-              >
-                <h3 className="text-xl font-bold mb-4">Key Features</h3>
-                <ul className="space-y-3">
-                  {product.features.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-
-              {/* Specifications */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="bg-card p-6 rounded-lg border"
-              >
-                <h3 className="text-xl font-bold mb-4">Specifications</h3>
-                <dl className="space-y-3">
-                  {Object.entries(product.specifications).map(([key, value]) => (
-                    <div key={key}>
-                      <dt className="text-sm font-semibold text-muted-foreground">{key}</dt>
-                      <dd className="text-sm">{value}</dd>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <Tabs defaultValue="features" className="w-full">
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="features">Features</TabsTrigger>
+                <TabsTrigger value="specifications">Specifications</TabsTrigger>
+                <TabsTrigger value="applications">Applications</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="features" className="mt-8">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Key Features</CardTitle>
+                    <CardDescription>
+                      Comprehensive features designed for optimal performance and reliability.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {product.features.map((feature, index) => (
+                        <div key={index} className="flex items-start space-x-3">
+                          <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                          <span className="text-foreground">{feature}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </dl>
-              </motion.div>
-
-              {/* Applications */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="bg-card p-6 rounded-lg border"
-              >
-                <h3 className="text-xl font-bold mb-4">Applications</h3>
-                <ul className="space-y-3">
-                  {product.applications.map((application, index) => (
-                    <li key={index} className="flex items-center">
-                      <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                      <span className="text-sm">{application}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            </div>
-          </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              
+              <TabsContent value="specifications" className="mt-8">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Technical Specifications</CardTitle>
+                    <CardDescription>
+                      Detailed technical specifications and performance parameters.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {Object.entries(product.specifications).map(([key, value]) => (
+                        <div key={key} className="border-b border-border pb-3 last:border-b-0">
+                          <dt className="font-semibold text-foreground">{key}</dt>
+                          <dd className="text-muted-foreground mt-1">{value}</dd>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              
+              <TabsContent value="applications" className="mt-8">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Applications & Industries</CardTitle>
+                    <CardDescription>
+                      Perfect for a wide range of industries and applications.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {product.applications.map((application, index) => (
+                        <div key={index} className="bg-secondary/20 rounded-lg p-4 text-center">
+                          <span className="font-medium text-foreground">{application}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </motion.div>
         </div>
       </div>
-      
+
       <Footer />
     </div>
   );
